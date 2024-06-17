@@ -2,9 +2,10 @@ import setuptools
 import tensorflow as tf
 import keras
 
+import joblib
 import numpy as np
 from tensorflow.keras.preprocessing import image
-from training import model
+
 # Load and preprocess the image you want to predict
 image_path = r"C:\Users\Aditya PC\PycharmProjects\hbridgefaultdetection\New dataset\Validation\fault_3_a\Fault_3_A_84.jpg"
 img = image.load_img(image_path, target_size=(150, 150))
@@ -13,6 +14,7 @@ img_array = np.expand_dims(img_array, axis=0)
 img_array /= 225.0  # Normalize the image data
 
 # Make a prediction
+model = joblib.load('saved_hbridge.joblib')
 prediction = model.predict(img_array)
 
 # Get the class index with the highest probability
